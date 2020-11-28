@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import "./App.css";
+import React, { useState } from 'react';
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SimpleCard from "./components/card";
+import SimpleCard from './components/card';
 
 function App() {
   return (
