@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SimpleCard from './components/card';
+import InfinityScroll from './components/infinity-scroll';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         crossOrigin="anonymous"
       />
       <header className="App-header">
-        <SimpleCard></SimpleCard>
+        <InfinityScroll />
       </header>
     </div>
   );

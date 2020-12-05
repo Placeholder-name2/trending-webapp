@@ -38,6 +38,8 @@
     "no-unused-vars": ["warn"],
     "no-unused-expressions": ["warn"],
     "semi-spacing": ["off"],
-    "no-unreachable": ["warn"]
+    "no-unreachable": ["warn"],
+    "comma-dangle": ["off"],
+    "eol-last": ["off"]
   }
 }
