@@ -35,6 +35,9 @@
     "space-before-function-paren": ["off"],
     "no-undef": ["off"],
     "semi": ["off"],
-    "no-unused-vars": ["warn"]
+    "no-unused-vars": ["warn"],
+    "no-unused-expressions": ["warn"],
+    "semi-spacing": ["off"],
+    "no-unreachable": ["warn"]
   }
 }
