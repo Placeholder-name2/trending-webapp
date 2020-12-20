@@ -9,7 +9,6 @@ function SimpleCard() {
       <Card.Body>
         <Card.Title style={{ color: 'black' }}>Put the title to twitter thingy here</Card.Title>
         <Card.Text style={{ color: 'black' }}>Put twitter thingy here</Card.Text>
-        <Button variant="primary">Go to top</Button>
       </Card.Body>
     </Card>
   );
