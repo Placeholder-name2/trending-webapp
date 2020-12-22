@@ -1,5 +1,6 @@
 import React from 'react'
 class TwitterApi extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -9,8 +10,14 @@ class TwitterApi extends React.Component {
         };
     }
     componentDidMount() {
-        fetch("https://api.twitter.com/1.1/trends/place.json?id=1", {
-            headers: new Headers({ 'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAFiyKAEAAAAACvhQhi7bqt7Va64ZVz0tjMHzfzw%3DWJXMBvo6MfSjTgjPO0FeIDyc1maDlIIVkjZ66HIh1AoTjDpv8D' })
+
+        const proxy = 'https://cors-anywhere.herokuapp.com/'
+        const api = `${proxy}https://api.twitter.com/1.1/trends/place.json?id=1`
+        fetch(api, {
+            headers: new Headers({
+                'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAFiyKAEAAAAACvhQhi7bqt7Va64ZVz0tjMHzfzw%3DWJXMBvo6MfSjTgjPO0FeIDyc1maDlIIVkjZ66HIh1AoTjDpv8D'
+                //Do we need origin or x-requested-with headers?
+            })
         })
             .then(res => res.json())
             .then(
