@@ -1,4 +1,7 @@
 import React from 'react'
+import TwitterItem from './TwitterItem'
+import { Tweet } from '../../../node_modules/react-twitter-widgets'
+
 class TwitterApi extends React.Component {
 
     constructor(props) {
@@ -6,7 +9,9 @@ class TwitterApi extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
+            items: [TwitterItem],
+            twitterId: "",
+            featuringHashtag: ""
         };
     }
     componentDidMount() {
@@ -20,39 +25,52 @@ class TwitterApi extends React.Component {
             })
         })
             .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result);
-                    this.setState({
-                        isLoaded: true,
-                        items: result.trends
-                    });
-                },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )
+            .then(result => {
+                console.log(result)
+                return result[0].trends
+            })
+            .then(trends =>
+                fetch(`${proxy}https://api.twitter.com/1.1/search/tweets.json?q=` + trends[0].query, {
+                    headers: new Headers({
+                        'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAFiyKAEAAAAACvhQhi7bqt7Va64ZVz0tjMHzfzw%3DWJXMBvo6MfSjTgjPO0FeIDyc1maDlIIVkjZ66HIh1AoTjDpv8D'
+                    })
+                })
+                    .then(searchRes => searchRes.json())
+                    .then(
+                        (searchResult) => {
+                            console.log(searchResult)
+                            this.setState({
+                                isloaded: true,
+                                twitterId: searchResult.statuses[0].id_str,
+                                featuringHashtag: trends.name
+                            })
+                        },
+                        (error) => {
+                            this.setState({
+                                isLoaded: true,
+                                error
+                            });
+                        }
+                    )
+            );
     }
     render() {
-        const { error, isLoaded, items } = this.state;
+        const { error, isLoaded, twitterId, featuringHashtag } = this.state;
         if (error) {
             return <div>Error: Fail</div>;
         } else if (!isLoaded) {
-            return <div>Loading...</div>;
-        } else {
+            console.log(twitterId, isLoaded, featuringHashtag)
             return (
                 <ul>
-                    {items.map(item => (
-                        <li key={item.name}>
-                            {item.name} {item.tweet_volume}
-                        </li>
-                    ))}
+                    <div>Trending right now on Twitter: {featuringHashtag}</div>
+                    <Tweet tweetId={twitterId}></Tweet>
+                </ul>
+            );
+        } else {
+            console.log(twitterId)
+            return (
+                <ul>
+                    <Tweet tweetId={twitterId}></Tweet>
                 </ul>
             );
         }

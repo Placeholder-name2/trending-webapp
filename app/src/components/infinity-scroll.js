@@ -4,7 +4,7 @@ import SimpleCard from './card';
 
 class InfinityScroll extends React.Component {
   state = {
-    items: Array.from({ length: 20 }),
+    items: Array.from({ length: 1 }),
   };
 
   fetchMoreData = () => {
@@ -12,7 +12,7 @@ class InfinityScroll extends React.Component {
     // 20 more records in 1.5 secs
     setTimeout(() => {
       this.setState({
-        items: this.state.items.concat(Array.from({ length: 20 })),
+        items: this.state.items.concat(Array.from({ length: 1 })),
       });
     }, 1500);
   };
@@ -29,7 +29,7 @@ class InfinityScroll extends React.Component {
           loader={<h4>Loading...</h4>}
         >
           {this.state.items.map((i, index) => (
-            <SimpleCard key={index}>
+            <SimpleCard key={index} test='test'>
             </SimpleCard>
           ))}
         </InfiniteScroll>
