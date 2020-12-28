@@ -19,15 +19,13 @@ class SpotifyApi extends React.Component {
   getFeaturedItems() {
     const proxy = 'https://cors-anywhere.herokuapp.com/';
     const api = `${proxy}https://api.spotify.com/v1/browse/featured-playlists`; //?limit=50`;
-    const token =
-      'BQDuNAM5WjKwIkuZUIkY5fIsuoPlD56YDGr5xZwJvdcFnpRBvU8sqboUIxFQvw-JguvEEBkJlw6BtkEcNbrbNvF6YuhDKONkN7epIW09cDDri5IqmyZVdHIcDXvqv60vWlzl2bYbGiXBBiYOfEKJLn1uOiKTyJQ';
 
     console.log();
     fetch(api, {
       // FIXME: token will time-out
       headers: new Headers({
         Authorization:
-          'Bearer BQCqup1nB9u0mIzwYLtu_L4u0ntYSa63sNchtIYrwjhZK0U6dCZDyi2kmEJxGIJLXLZ8AH_TgIsuivCnjGIh60J0IXmJvIdpRAsAAX_cYlSrTBpyg4QQYfyj1aro03YUR3bk85LAnaBMqcwwIRepldLaYuHmlqE',
+          'Bearer BQAGXZO5x045BT_NDepK_TzDM2rZMkpcuCIUJlz0LucWxzmArFMvEIp1PdepHLt1mvmBMW2KxKwgjjA1ZuvDSs8M95r-Yjyhc_-f3mlEHQV3qU-11D8a_dYVC4iCk8MMAbpt-MurNirVdlEqtVPxp3ElA34Dn3U',
       }),
     })
       .then((result) => result.json())
