@@ -30,17 +30,18 @@ class TwitterApi extends React.Component {
             .then(result => {
                 console.log(result);
                 //here we get 50 trending hashtags, need to create cards for each
+                const index = Math.floor(Math.random() * result[0].trends.length)
                 this.setState({
-                    featuringHashtag: result[0].trends[0].name
+                    featuringHashtag: result[0].trends[index].name
                 });
-                return result[0].trends;
+                return result[0].trends[index];
             })
-            .then(trends => this.getSearchResult(proxy, trends)
+            .then(trend => this.getSearchResult(proxy, trend)
             );
     }
 
-    getSearchResult(proxy, trends) {
-        return fetch(`${proxy}https://api.twitter.com/1.1/search/tweets.json?q=` + trends[10].query, {
+    getSearchResult(proxy, trend) {
+        return fetch(`${proxy}https://api.twitter.com/1.1/search/tweets.json?q=` + trend.query, {
             headers: new Headers({
                 'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAFiyKAEAAAAACvhQhi7bqt7Va64ZVz0tjMHzfzw%3DWJXMBvo6MfSjTgjPO0FeIDyc1maDlIIVkjZ66HIh1AoTjDpv8D'
             })
