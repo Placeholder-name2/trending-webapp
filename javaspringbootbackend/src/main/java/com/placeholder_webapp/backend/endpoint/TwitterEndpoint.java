@@ -3,10 +3,9 @@ package com.placeholder_webapp.backend.endpoint;
 import com.placeholder_webapp.backend.api.TwitterApi;
 import com.placeholder_webapp.backend.api.TwitterApiResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.reactivestreams.Publisher;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -14,16 +13,16 @@ import java.util.List;
 @RestController
 public class TwitterEndpoint {
 
-    TwitterApi twitterApi;
+  private TwitterApi twitterApi;
 
-    public TwitterEndpoint(TwitterApi twitterApi) {
-        this.twitterApi = twitterApi;
-    }
+  public TwitterEndpoint(TwitterApi twitterApi) {
+    this.twitterApi = twitterApi;
+  }
 
-    @RequestMapping("/twitterId")
-    public Flux<Publisher<? extends List<TwitterApiResponse>>> getTwitterId() {
-        log.info("Testing testing...");
-        return twitterApi.getTwitterTrendingCard();
-    }
-
+  @RequestMapping("/twitter")
+  public Mono<List<TwitterApiResponse>> getTwitterId() {
+    log.info("Testing testing...");
+    Mono<List<TwitterApiResponse>> twitterTrendingCard = twitterApi.getTwitterTrendingCard();
+    return twitterTrendingCard;
+  }
 }

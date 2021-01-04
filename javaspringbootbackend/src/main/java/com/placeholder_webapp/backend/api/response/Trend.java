@@ -1,16 +1,22 @@
 package com.placeholder_webapp.backend.api.response;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.util.List;
-
-@Getter
 @ToString
+@Getter
 @EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TwitterSearchResult {
-  List<Status> statuses;
+public class Trend {
+  String name;
+  String query;
+
+  @JsonCreator
+  public Trend(String name, String query) {
+    this.name = name;
+    this.query = query;
+  }
 }
