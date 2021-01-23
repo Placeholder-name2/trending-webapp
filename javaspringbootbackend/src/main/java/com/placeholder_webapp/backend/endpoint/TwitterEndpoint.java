@@ -1,5 +1,7 @@
 package com.placeholder_webapp.backend.endpoint;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.placeholder_webapp.backend.api.DefluxedTwitterApi;
 import com.placeholder_webapp.backend.api.TwitterApi;
 import com.placeholder_webapp.backend.api.TwitterApiResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +16,11 @@ import java.util.List;
 public class TwitterEndpoint {
 
   private TwitterApi twitterApi;
+  private DefluxedTwitterApi defluxedTwitterApi;
 
-  public TwitterEndpoint(TwitterApi twitterApi) {
+  public TwitterEndpoint(TwitterApi twitterApi, DefluxedTwitterApi defluxedTwitterApi) {
     this.twitterApi = twitterApi;
+    this.defluxedTwitterApi = defluxedTwitterApi;
   }
 
   @RequestMapping("/twitter")
@@ -24,5 +28,10 @@ public class TwitterEndpoint {
     log.info("Testing testing...");
     Mono<List<TwitterApiResponse>> twitterTrendingCard = twitterApi.getTwitterTrendingCard();
     return twitterTrendingCard;
+  }
+
+  @RequestMapping("/deflux")
+  public void getTwitterDeflux() throws JsonProcessingException {
+    defluxedTwitterApi.getTrending();
   }
 }
