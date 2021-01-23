@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import InfinityScroll from './components/infinity-scroll';
-import Fotter from './components/fotter';
+import Footer from './components/footer';
+import Header from './components/header';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <InfinityScroll />
-        <Fotter />
-      </header>
+      <Header />
+      <InfinityScroll />
+      <Footer />
     </div>
   );
 }

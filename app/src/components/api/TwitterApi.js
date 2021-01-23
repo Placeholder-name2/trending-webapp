@@ -80,7 +80,7 @@ class TwitterApi extends React.Component {
             return (
                 <ul>
                     <div>Trending right now on Twitter: {featuringHashtag}</div>
-                    <Tweet tweetId={twitterId}></Tweet>
+                    <Tweet tweetId={1352993929474367488}></Tweet>
                 </ul>
             );
         }

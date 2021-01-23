@@ -25,7 +25,7 @@ class SpotifyApi extends React.Component {
       // FIXME: token will time-out
       headers: new Headers({
         Authorization:
-          'Bearer BQAGXZO5x045BT_NDepK_TzDM2rZMkpcuCIUJlz0LucWxzmArFMvEIp1PdepHLt1mvmBMW2KxKwgjjA1ZuvDSs8M95r-Yjyhc_-f3mlEHQV3qU-11D8a_dYVC4iCk8MMAbpt-MurNirVdlEqtVPxp3ElA34Dn3U',
+          'Bearer BQBIklbdymLZmNOOOtWUFM1Oe46FpyhXdVU00uVdO_eNuI6DJhdh68GvDD9eKx3mQl0vDikTtr09Dxr0e3lvEWmE5Sj9Hsi7zYZUuO5ySqsZV06Dz01mDdo72_RCfjQz6rArkZRxmyHJjweIMEjRpBsnWFzjfjA',
       }),
     })
       .then((result) => result.json())

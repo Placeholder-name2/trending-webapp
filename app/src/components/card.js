@@ -7,22 +7,17 @@ function SimpleCard(item) {
   return (
     <div>
       <Card>
-        {' '}
-        {console.log(item.name)} <Card.Header style={{ color: 'black' }}> Featured </Card.Header>{' '}
-        <Card.Body>
-          <Card.Title style={{ color: 'black' }}> Put the title to twitter thingy here </Card.Title>{' '}
-          <TwitterApi> </TwitterApi> {/*<Tweet tweetId="967824267948773377" options={{ theme: "dark" }}></Tweet>*/}{' '}
-          {/*to use Tweet element, need to run 'npm install --save react-twitter-widgets' */}{' '}
-        </Card.Body>{' '}
+        {/* <Card.Body className="d-flex justify-content-center">
+          <Card.Title style={{ color: 'black' }} className="d-flex justify-content-center"></Card.Title>
+          <TwitterApi> </TwitterApi>
+        </Card.Body> */}
       </Card>
-      <Card>
-        {' '}
-        {console.log(item.name)} <Card.Header style={{ color: 'black' }}> Featured </Card.Header>{' '}
+      {/* <Card>
         <Card.Body>
-          <Card.Title style={{ color: 'black' }}> Put the title to Spotify thingy here </Card.Title>{' '}
-          <SpotifyApi></SpotifyApi>{' '}
-        </Card.Body>{' '}
-      </Card>{' '}
+          <Card.Title style={{ color: 'black' }}> Put the title to Spotify thingy here </Card.Title>
+           <SpotifyApi></SpotifyApi> 
+        </Card.Body>
+      </Card> */}
     </div>
   );
 }
