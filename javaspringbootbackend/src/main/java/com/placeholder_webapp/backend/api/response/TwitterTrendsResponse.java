@@ -2,21 +2,18 @@ package com.placeholder_webapp.backend.api.response;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import lombok.Value;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Value
-@EqualsAndHashCode
-@ToString
-public class TwitterTrendingResponse {
+public class TwitterTrendsResponse {
   List<Trend> trends;
 
   @JsonCreator
-  public TwitterTrendingResponse(List<Trend> trends) {
+  public TwitterTrendsResponse(@JsonProperty("trends") List<Trend> trends) {
     this.trends = trends;
   }
 }

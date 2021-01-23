@@ -1,6 +1,4 @@
 import React from 'react';
-import TwitterItem from './TwitterItem';
-import { Tweet } from '../../../node_modules/react-twitter-widgets';
 
 class SpotifyApi extends React.Component {
   constructor(props) {
