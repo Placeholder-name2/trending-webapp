@@ -1,25 +1,21 @@
 package com.placeholder_webapp.backend.api;
 
-public class TwitterApiResponse {
-    private String id;
-    private String trendingHashtag;
-    private int retweetCount;
+import com.placeholder_webapp.backend.api.common.TrendingResponse;
 
-    public TwitterApiResponse(String id, String trendingHashtag, int retweetCount) {
-        this.id = id;
-        this.trendingHashtag = trendingHashtag;
-        this.retweetCount = retweetCount;
-    }
+import java.time.LocalDateTime;
+import java.util.Map;
 
-    public String getId() {
-        return id;
-    }
 
-    public String getTrendingHashtag() {
-        return trendingHashtag;
-    }
+public class TwitterApiResponse  extends TrendingResponse {
 
-    public int getRetweetCount() {
-        return retweetCount;
-    }
+  public TwitterApiResponse(String id, String title, String trendingHashtag, int retweetCount, String tweetId) {
+    super(
+      id,
+      title,
+      "Twitter",
+      LocalDateTime.now(),
+      "Twitter?",
+      Map.of("trending_hashtag", trendingHashtag, "retweet_count", String.valueOf(retweetCount), "id", tweetId)
+    );
+  }
 }

@@ -2,7 +2,6 @@ package com.placeholder_webapp.backend.endpoint;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.placeholder_webapp.backend.api.DefluxedTwitterApi;
-import com.placeholder_webapp.backend.api.TwitterApi;
 import com.placeholder_webapp.backend.api.TwitterApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,19 +14,10 @@ import java.util.List;
 @RestController
 public class TwitterEndpoint {
 
-  private TwitterApi twitterApi;
   private DefluxedTwitterApi defluxedTwitterApi;
 
-  public TwitterEndpoint(TwitterApi twitterApi, DefluxedTwitterApi defluxedTwitterApi) {
-    this.twitterApi = twitterApi;
+  public TwitterEndpoint( DefluxedTwitterApi defluxedTwitterApi) {
     this.defluxedTwitterApi = defluxedTwitterApi;
-  }
-
-  @RequestMapping("/twitter")
-  public Mono<List<TwitterApiResponse>> getTwitterId() {
-    log.info("Testing testing...");
-    Mono<List<TwitterApiResponse>> twitterTrendingCard = twitterApi.getTwitterTrendingCard();
-    return twitterTrendingCard;
   }
 
   @RequestMapping("/deflux")
