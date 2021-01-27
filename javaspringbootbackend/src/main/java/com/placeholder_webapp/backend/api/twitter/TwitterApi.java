@@ -24,7 +24,7 @@ public class TwitterApi implements TrendingApi {
   private RestSingleSender restSingleSender;
   private ObjectMapper objectMapper;
 
-  private static String HOST = "https://cors-anywhere.herokuapp.com/https://api.twitter.com/";
+  private static String HOST = "https://api.twitter.com/";
   private static String TWITTER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAFiyKAEAAAAACvhQhi7bqt7Va64ZVz0tjMHzfzw%3DWJXMBvo6MfSjTgjPO0FeIDyc1maDlIIVkjZ66HIh1AoTjDpv8D";
 
   public TwitterApi(RestSingleSender restSingleSender, ObjectMapper objectMapper) {
