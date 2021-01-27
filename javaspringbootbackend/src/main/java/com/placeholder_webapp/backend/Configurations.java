@@ -2,6 +2,7 @@ package com.placeholder_webapp.backend;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.placeholder_webapp.backend.api.RestSingleSender;
+import com.placeholder_webapp.backend.api.spotify.SpotifyApi;
 import com.placeholder_webapp.backend.api.twitter.TwitterApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -25,5 +26,10 @@ public class Configurations {
   @Bean
   TwitterApi twitterApi(RestSingleSender restSingleSender, ObjectMapper objectMapper) {
     return new TwitterApi(restSingleSender, objectMapper);
+  }
+
+  @Bean
+  SpotifyApi spotifyApi(RestSingleSender restSingleSender, ObjectMapper objectMapper) {
+    return new SpotifyApi(restSingleSender, objectMapper);
   }
 }

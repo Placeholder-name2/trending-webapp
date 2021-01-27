@@ -1,25 +1,24 @@
 package com.placeholder_webapp.backend.api.adapter.internal.common;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 
 @Data
+@Builder
 public class TrendingResponse {
   String id;
   String title;
   String source;
   LocalDateTime datePublished;
   String serviceId;
-  Map<String, String> data;
 
-  public TrendingResponse(String id, String title, String source, LocalDateTime datePublished, String serviceId, Map<String, String> data) {
+  public TrendingResponse(String id, String title, String source, LocalDateTime datePublished, String serviceId) {
     this.id = id;
     this.title = title;
     this.source = source;
     this.datePublished = datePublished;
     this.serviceId = serviceId;
-    this.data = data;
   }
 }

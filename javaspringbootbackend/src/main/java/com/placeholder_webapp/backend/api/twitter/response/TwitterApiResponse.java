@@ -3,10 +3,12 @@ package com.placeholder_webapp.backend.api.twitter.response;
 import com.placeholder_webapp.backend.api.adapter.internal.common.TrendingResponse;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 
 
 public class TwitterApiResponse extends TrendingResponse {
+  private String trendingHashTag;
+  private int retweetCount;
+  private String tweetId;
 
   public TwitterApiResponse(String id, String title, String trendingHashtag, int retweetCount, String tweetId) {
     super(
@@ -14,9 +16,11 @@ public class TwitterApiResponse extends TrendingResponse {
       title,
       "Twitter",
       LocalDateTime.now(),
-      "Twitter?",
-      Map.of("trending_hashtag", trendingHashtag, "retweet_count", String.valueOf(retweetCount), "id", tweetId)
+      "Twitter?"
     );
+    trendingHashTag = trendingHashtag;
+    this.retweetCount = retweetCount;
+    this.tweetId = tweetId;
   }
 
   public static TwitterApiResponse empty() {
