@@ -1,4 +1,4 @@
-package com.placeholder_webapp.backend.api.common;
+package com.placeholder_webapp.backend.api.adapter.internal.common;
 
 import lombok.Data;
 

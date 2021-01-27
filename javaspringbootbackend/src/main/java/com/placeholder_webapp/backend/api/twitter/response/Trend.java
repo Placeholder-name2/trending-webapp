@@ -1,4 +1,4 @@
-package com.placeholder_webapp.backend.api.response;
+package com.placeholder_webapp.backend.api.twitter.response;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

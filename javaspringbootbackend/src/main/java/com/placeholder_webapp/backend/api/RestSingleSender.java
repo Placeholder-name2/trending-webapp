@@ -13,7 +13,7 @@ public class RestSingleSender {
     httpClient = HttpClient.newHttpClient();
   }
 
-  HttpResponse<String> sendRequest(HttpRequest request) {
+  public HttpResponse<String> sendRequest(HttpRequest request) {
     try {
       return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
     } catch (IOException e) {
