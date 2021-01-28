@@ -1,6 +1,7 @@
 package com.placeholder_webapp.backend.api.adapter.external;
 
 import com.placeholder_webapp.backend.api.adapter.internal.common.TrendingResponse;
+import com.placeholder_webapp.backend.api.nytimes.nytimes.NyTimesApi;
 import com.placeholder_webapp.backend.api.spotify.SpotifyApi;
 import com.placeholder_webapp.backend.api.twitter.TwitterApi;
 import lombok.extern.slf4j.Slf4j;
@@ -15,10 +16,12 @@ public class Endpoint {
 
   private TwitterApi twitterApi;
   private SpotifyApi spotifyApi;
+  private NyTimesApi nyTimesApi;
 
-  public Endpoint(TwitterApi twitterApi, SpotifyApi spotifyApi) {
+  public Endpoint(TwitterApi twitterApi, SpotifyApi spotifyApi, NyTimesApi nyTimesApi) {
     this.twitterApi = twitterApi;
     this.spotifyApi = spotifyApi;
+    this.nyTimesApi = nyTimesApi;
   }
 
   @RequestMapping("/")
@@ -34,5 +37,10 @@ public class Endpoint {
   @RequestMapping("/spotify")
   public List<TrendingResponse> getSpotifyTrending() {
     return spotifyApi.getTrending();
+  }
+
+  @RequestMapping("/nytimes")
+  public List<TrendingResponse> getNyTimesTrending() {
+    return nyTimesApi.getTrending();
   }
 }
