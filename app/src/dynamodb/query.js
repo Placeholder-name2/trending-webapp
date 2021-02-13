@@ -1,29 +1,32 @@
-import * as AWS from 'aws-sdk';
-process.env.REGION = ''; //put region here for now
-AWS.config.update({ region: process.env.REGION });
+// Need aws credentials file in default directory to work
 
-var ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
+var AWS = require('aws-sdk');
+var credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
+AWS.config.credentials = credentials;
 
-//Not done below
+process.env.REGION = "eu-north-1"; //put region here for now
+AWS.config.update({ region : process.env.REGION});
+
+var ddb = new AWS.DynamoDB.DocumentClient();//({ apiVersion: '2012-08-10' });
+
 var params = {
-  ExpressionAttributeValues: {
-    ':s': { N: '2' },
-    ':e': { N: '09' },
-    ':topic': { S: 'PHRASE' },
+  TableName: "trending_item", 
+  Select: "ALL_ATTRIBUTES",
+  //FilterExpression: "contains(#sv, :sv_name)",
+  FilterExpression: "#sv = :sv_name",
+  ExpressionAttributeNames: {
+    "#sv": "service",
   },
-  KeyConditionExpression: 'Season = :s and Episode > :e',
-  ProjectionExpression: 'Episode, Title, Subtitle',
-  FilterExpression: 'contains (Subtitle, :topic)',
-  TableName: 'EPISODES_TABLE',
+  ExpressionAttributeValues: {
+    ":sv_name": "TWITTER",
+  }
 };
 
-ddb.query(params, function (err, data) {
+ddb.scan(params, function(err, data) {
   if (err) {
-    console.log('Error', err);
+     console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
   } else {
-    //console.log("Success", data.Items);
-    data.Items.forEach(function (element, index, array) {
-      console.log(element.Title.S + ' (' + element.Subtitle.S + ')');
-    });
+     console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
   }
 });
+
