@@ -58,7 +58,14 @@
       <artifactId>jetty-reactive-httpclient</artifactId>
       <version>1.0.3</version>
     </dependency>
-    </dependencies>
+    <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-dynamodb -->
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-dynamodb</artifactId>
+      <version>1.11.950</version>
+    </dependency>
+
+  </dependencies>
 
 	<build>
 		<plugins>

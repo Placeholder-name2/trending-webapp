@@ -5,12 +5,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.placeholder_webapp.backend.api.RestSingleSender;
 import com.placeholder_webapp.backend.api.adapter.internal.common.TrendingApi;
 import com.placeholder_webapp.backend.api.adapter.internal.common.TrendingResponse;
+import com.placeholder_webapp.backend.api.common.Country;
+import com.placeholder_webapp.backend.api.common.Service;
 import com.placeholder_webapp.backend.api.spotify.response.SpotifyFeaturedPlaylistResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -54,7 +57,7 @@ public class SpotifyApi implements TrendingApi {
       .map(item -> {
         String url = item.getExternalUrls().getSpotify();
         String playlistName = item.getDescription();
-        return new SpotifyApiResponse(UUID.randomUUID().toString(), "SpotifyTitle", url, playlistName);
+        return new SpotifyApiResponse(UUID.randomUUID().toString(), UUID.randomUUID().toString(), Service.SPOTIFY, LocalDateTime.now(), Country.GLOBAL, url, playlistName);
       })
       .collect(Collectors.toList());
   }

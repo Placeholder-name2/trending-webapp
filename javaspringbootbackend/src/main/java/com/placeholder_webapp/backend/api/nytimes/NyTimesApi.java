@@ -1,11 +1,12 @@
-package com.placeholder_webapp.backend.api.nytimes.nytimes;
+package com.placeholder_webapp.backend.api.nytimes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.placeholder_webapp.backend.api.RestSingleSender;
 import com.placeholder_webapp.backend.api.adapter.internal.common.TrendingApi;
 import com.placeholder_webapp.backend.api.adapter.internal.common.TrendingResponse;
-import com.placeholder_webapp.backend.api.nytimes.nytimes.response.*;
+import com.placeholder_webapp.backend.api.common.Country;
+import com.placeholder_webapp.backend.api.nytimes.response.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.URI;
@@ -57,9 +58,9 @@ public class NyTimesApi implements TrendingApi {
     if (nyTimesMedia != null) {
       String caption = nyTimesMedia.getCaption();
       String imageUrl = findCorrectImageUrl(nyTimesMedia);
-      return new NyTimesTrendingResponse(title, summary, url, imageUrl, caption);
+      return new NyTimesTrendingResponse(summary, url, imageUrl, caption, Country.GLOBAL);
     }
-    return new NyTimesTrendingResponse(title, summary, url, "", "");
+    throw new RuntimeException("Ny times null response");
   }
 
   private String findCorrectImageUrl(NyTimesMedia nyTimesMedia) {

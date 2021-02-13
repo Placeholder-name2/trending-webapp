@@ -2,7 +2,7 @@ package com.placeholder_webapp.backend;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.placeholder_webapp.backend.api.RestSingleSender;
-import com.placeholder_webapp.backend.api.nytimes.nytimes.NyTimesApi;
+import com.placeholder_webapp.backend.api.nytimes.NyTimesApi;
 import com.placeholder_webapp.backend.api.spotify.SpotifyApi;
 import com.placeholder_webapp.backend.api.twitter.TwitterApi;
 import lombok.extern.slf4j.Slf4j;

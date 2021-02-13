@@ -1,4 +1,4 @@
-package com.placeholder_webapp.backend.api.nytimes.nytimes.response;
+package com.placeholder_webapp.backend.api.nytimes.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;

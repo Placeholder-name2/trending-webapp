@@ -1,7 +1,7 @@
 package com.placeholder_webapp.backend.api.adapter.external;
 
 import com.placeholder_webapp.backend.api.adapter.internal.common.TrendingResponse;
-import com.placeholder_webapp.backend.api.nytimes.nytimes.NyTimesApi;
+import com.placeholder_webapp.backend.api.nytimes.NyTimesApi;
 import com.placeholder_webapp.backend.api.spotify.SpotifyApi;
 import com.placeholder_webapp.backend.api.twitter.TwitterApi;
 import lombok.extern.slf4j.Slf4j;
