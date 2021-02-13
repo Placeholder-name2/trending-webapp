@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.placeholder_webapp.backend.api.RestSingleSender;
 import com.placeholder_webapp.backend.api.adapter.internal.common.TrendingApi;
 import com.placeholder_webapp.backend.api.adapter.internal.common.TrendingResponse;
+import com.placeholder_webapp.backend.api.common.Country;
 import com.placeholder_webapp.backend.api.twitter.response.Status;
 import com.placeholder_webapp.backend.api.twitter.response.TwitterApiResponse;
 import com.placeholder_webapp.backend.api.twitter.response.TwitterSearchResult;
@@ -52,7 +53,7 @@ public class TwitterApi implements TrendingApi {
       return searchTrends(twitterTrendsResponse);
     } catch (JsonProcessingException e) {
       log.warn("Twitter gone goofed: {}", e.getMessage());
-      return List.of(TwitterApiResponse.empty());
+      throw new RuntimeException(e);
     }
   }
 
@@ -63,10 +64,11 @@ public class TwitterApi implements TrendingApi {
         .orElseThrow();
       return new TwitterApiResponse(
         UUID.randomUUID().toString(),
-        "",
+        UUID.randomUUID().toString(),
         trend.getName(),
         trend.getTweetVolume(),
-        status.getId()
+        status.getId(),
+        Country.GLOBAL
       );
     }).collect(Collectors.toList());
   }

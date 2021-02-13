@@ -1,11 +1,12 @@
-package com.placeholder_webapp.backend.api.nytimes.nytimes;
+package com.placeholder_webapp.backend.api.nytimes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.placeholder_webapp.backend.api.RestSingleSender;
 import com.placeholder_webapp.backend.api.adapter.internal.common.TrendingApi;
 import com.placeholder_webapp.backend.api.adapter.internal.common.TrendingResponse;
-import com.placeholder_webapp.backend.api.nytimes.nytimes.response.*;
+import com.placeholder_webapp.backend.api.common.Country;
+import com.placeholder_webapp.backend.api.nytimes.response.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.URI;
@@ -53,13 +54,14 @@ public class NyTimesApi implements TrendingApi {
     String title = nyTimesResults.getTitle();
     String summary = nyTimesResults.getSummary();
     String url = nyTimesResults.getUrl();
-    NyTimesMedia nyTimesMedia = nyTimesResults.getMedia().get(0);
-    if (nyTimesMedia != null) {
-      String caption = nyTimesMedia.getCaption();
-      String imageUrl = findCorrectImageUrl(nyTimesMedia);
-      return new NyTimesTrendingResponse(title, summary, url, imageUrl, caption);
+    List<NyTimesMedia> nyTimesMedia = nyTimesResults.getMedia();
+    if (nyTimesMedia.size() > 0 && nyTimesMedia.get(0) != null) {
+      NyTimesMedia nyTimesMediaObject = nyTimesMedia.get(0);
+      String caption = nyTimesMediaObject.getCaption();
+      String imageUrl = findCorrectImageUrl(nyTimesMediaObject);
+      return new NyTimesTrendingResponse(summary, url, imageUrl, caption, Country.GLOBAL);
     }
-    return new NyTimesTrendingResponse(title, summary, url, "", "");
+    return new NyTimesTrendingResponse(summary, url, "", "", Country.GLOBAL);
   }
 
   private String findCorrectImageUrl(NyTimesMedia nyTimesMedia) {
