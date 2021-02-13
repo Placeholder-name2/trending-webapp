@@ -1,29 +1,47 @@
-import * as AWS from 'aws-sdk';
-process.env.REGION = ''; //put region here for now
-AWS.config.update({ region: process.env.REGION });
+//import * as AWS from 'aws-sdk';
+//process.env.AWS_SDK_LOAD_CONFIG = true; 
 
-var ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
+/*
+var AWS = require("aws-sdk");
+
+
+AWS.config.getCredentials(function(err) {
+  if (err) console.log(err.stack); 
+  // credentials not loaded
+  else {
+    console.log("Access key:", AWS.config.credentials.accessKeyId);
+  }
+});
+*/
+var AWS = require('aws-sdk');
+var credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
+AWS.config.credentials = credentials;
+
+process.env.REGION = "eu-north-1"; //put region here for now
+AWS.config.update({ region : process.env.REGION});
+
+var ddb = new AWS.DynamoDB.DocumentClient();//({ apiVersion: '2012-08-10' });
 
 //Not done below
 var params = {
-  ExpressionAttributeValues: {
-    ':s': { N: '2' },
-    ':e': { N: '09' },
-    ':topic': { S: 'PHRASE' },
+  TableName: "Incli",
+  KeyConditionExpression: "#iid = :id_val",
+  ExpressionAttributeNames: { 
+    "#iid": "ID",
   },
-  KeyConditionExpression: 'Season = :s and Episode > :e',
-  ProjectionExpression: 'Episode, Title, Subtitle',
-  FilterExpression: 'contains (Subtitle, :topic)',
-  TableName: 'EPISODES_TABLE',
+  ExpressionAttributeValues: {
+    ":id_val": '120',
+    ":id_val": '1',
+  }
 };
 
 ddb.query(params, function (err, data) {
   if (err) {
     console.log('Error', err);
   } else {
-    //console.log("Success", data.Items);
-    data.Items.forEach(function (element, index, array) {
-      console.log(element.Title.S + ' (' + element.Subtitle.S + ')');
+    console.log("Query succeeded.");
+    data.Items.forEach(function(item) {
+        console.log(" -", item.ID + ": " + item.URL);
     });
   }
 });
