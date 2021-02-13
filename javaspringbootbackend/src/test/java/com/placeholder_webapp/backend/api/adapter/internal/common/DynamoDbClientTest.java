@@ -3,7 +3,7 @@ package com.placeholder_webapp.backend.api.adapter.internal.common;
 import com.placeholder_webapp.backend.api.common.Service;
 import org.junit.jupiter.api.Test;
 
-class DyamoDbClientTest {
+class DynamoDbClientTest {
 
   @Test
   void addItemToDatabase() {

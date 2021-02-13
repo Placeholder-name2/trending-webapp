@@ -10,7 +10,7 @@ import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
 
-public class DyamoDbClient implements Database {
+public class DynamoDbClient implements Database {
   private static final String TEST_TABLE_NAME = "Incli";
   private static final String TRENDING_ITEM_TABLE_NAME = "trending_item";
   // TODO: 2021-02-13 Inject credentials from file on VM
@@ -22,7 +22,7 @@ public class DyamoDbClient implements Database {
     .build();
   private static DynamoDB dynamoDB = new DynamoDB(client);
 
-  private DyamoDbClient() {
+  public DynamoDbClient() {
   }
 
   @Override

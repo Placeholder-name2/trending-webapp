@@ -54,13 +54,14 @@ public class NyTimesApi implements TrendingApi {
     String title = nyTimesResults.getTitle();
     String summary = nyTimesResults.getSummary();
     String url = nyTimesResults.getUrl();
-    NyTimesMedia nyTimesMedia = nyTimesResults.getMedia().get(0);
-    if (nyTimesMedia != null) {
-      String caption = nyTimesMedia.getCaption();
-      String imageUrl = findCorrectImageUrl(nyTimesMedia);
+    List<NyTimesMedia> nyTimesMedia = nyTimesResults.getMedia();
+    if (nyTimesMedia.size() > 0 && nyTimesMedia.get(0) != null) {
+      NyTimesMedia nyTimesMediaObject = nyTimesMedia.get(0);
+      String caption = nyTimesMediaObject.getCaption();
+      String imageUrl = findCorrectImageUrl(nyTimesMediaObject);
       return new NyTimesTrendingResponse(summary, url, imageUrl, caption, Country.GLOBAL);
     }
-    throw new RuntimeException("Ny times null response");
+    return new NyTimesTrendingResponse(summary, url, "", "", Country.GLOBAL);
   }
 
   private String findCorrectImageUrl(NyTimesMedia nyTimesMedia) {

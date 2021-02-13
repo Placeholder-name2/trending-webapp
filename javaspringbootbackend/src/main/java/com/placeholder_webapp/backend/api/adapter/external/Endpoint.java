@@ -1,5 +1,6 @@
 package com.placeholder_webapp.backend.api.adapter.external;
 
+import com.placeholder_webapp.backend.api.adapter.internal.common.DynamoDbClient;
 import com.placeholder_webapp.backend.api.adapter.internal.common.TrendingResponse;
 import com.placeholder_webapp.backend.api.nytimes.NyTimesApi;
 import com.placeholder_webapp.backend.api.spotify.SpotifyApi;
@@ -17,11 +18,13 @@ public class Endpoint {
   private TwitterApi twitterApi;
   private SpotifyApi spotifyApi;
   private NyTimesApi nyTimesApi;
+  private DynamoDbClient db;
 
-  public Endpoint(TwitterApi twitterApi, SpotifyApi spotifyApi, NyTimesApi nyTimesApi) {
+  public Endpoint(TwitterApi twitterApi, SpotifyApi spotifyApi, NyTimesApi nyTimesApi, DynamoDbClient db) {
     this.twitterApi = twitterApi;
     this.spotifyApi = spotifyApi;
     this.nyTimesApi = nyTimesApi;
+    this.db = db;
   }
 
   @RequestMapping("/")
@@ -31,16 +34,22 @@ public class Endpoint {
 
   @RequestMapping("/twitter")
   public List<TrendingResponse> getTwitterTrending() {
-    return twitterApi.getTrending();
+    List<TrendingResponse> twitterTrendingResponses = twitterApi.getTrending();
+    twitterTrendingResponses.forEach(trendingResponse -> db.addItem(trendingResponse));
+    return twitterTrendingResponses;
   }
 
   @RequestMapping("/spotify")
   public List<TrendingResponse> getSpotifyTrending() {
-    return spotifyApi.getTrending();
+    List<TrendingResponse> spotifyTrendingResponses = spotifyApi.getTrending();
+    spotifyTrendingResponses.forEach(trendingResponse -> db.addItem(trendingResponse));
+    return spotifyTrendingResponses;
   }
 
   @RequestMapping("/nytimes")
   public List<TrendingResponse> getNyTimesTrending() {
-    return nyTimesApi.getTrending();
+    List<TrendingResponse> nyTimesTrendingResponses = nyTimesApi.getTrending();
+    nyTimesTrendingResponses.forEach(trendingResponse -> db.addItem(trendingResponse));
+    return nyTimesTrendingResponses;
   }
 }
