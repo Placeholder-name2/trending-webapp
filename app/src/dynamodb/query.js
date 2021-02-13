@@ -1,18 +1,5 @@
-//import * as AWS from 'aws-sdk';
-//process.env.AWS_SDK_LOAD_CONFIG = true; 
+// Need aws credentials file in default directory to work
 
-/*
-var AWS = require("aws-sdk");
-
-
-AWS.config.getCredentials(function(err) {
-  if (err) console.log(err.stack); 
-  // credentials not loaded
-  else {
-    console.log("Access key:", AWS.config.credentials.accessKeyId);
-  }
-});
-*/
 var AWS = require('aws-sdk');
 var credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
 AWS.config.credentials = credentials;
@@ -22,26 +9,24 @@ AWS.config.update({ region : process.env.REGION});
 
 var ddb = new AWS.DynamoDB.DocumentClient();//({ apiVersion: '2012-08-10' });
 
-//Not done below
 var params = {
-  TableName: "Incli",
-  KeyConditionExpression: "#iid = :id_val",
-  ExpressionAttributeNames: { 
-    "#iid": "ID",
+  TableName: "trending_item", 
+  Select: "ALL_ATTRIBUTES",
+  //FilterExpression: "contains(#sv, :sv_name)",
+  FilterExpression: "#sv = :sv_name",
+  ExpressionAttributeNames: {
+    "#sv": "service",
   },
   ExpressionAttributeValues: {
-    ":id_val": '120',
-    ":id_val": '1',
+    ":sv_name": "TWITTER",
   }
 };
 
-ddb.query(params, function (err, data) {
+ddb.scan(params, function(err, data) {
   if (err) {
-    console.log('Error', err);
+     console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
   } else {
-    console.log("Query succeeded.");
-    data.Items.forEach(function(item) {
-        console.log(" -", item.ID + ": " + item.URL);
-    });
+     console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
   }
 });
+
