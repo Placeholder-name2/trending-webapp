@@ -1,10 +1,11 @@
 import React from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import getDatabaseItems from '../dynamodb/database';
 import SimpleCard from './card';
 
 class InfinityScroll extends React.Component {
   state = {
-    items: Array.from({ length: 1 }),
+    items: getDatabaseItems("twitter"),
   };
 
   fetchMoreData = () => {
@@ -20,7 +21,7 @@ class InfinityScroll extends React.Component {
   render() {
     return (
       <div>
-        <h1>Trending is comming</h1>
+        <h1>Trending is coming</h1>
         <hr />
         <InfiniteScroll
           dataLength={this.state.items.length}
