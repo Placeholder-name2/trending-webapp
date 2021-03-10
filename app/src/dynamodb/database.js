@@ -24,11 +24,12 @@ function getDatabaseItems(tableName) {
   ddb.scan(params, function (err, data) {
     if (err) {
       console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+      return ""
     } else {
-      console.log("Successfully got JSON from db: \n", JSON.stringify(data, null, 2));
-      const databaseItems = JSON.stringify(data);
-      console.log("GetItem succeeded:", databaseItems);
-      return JSON.parse(databaseItems)
+      const databaseItemsString = JSON.stringify(data, null, 2);
+      console.log("Successfully got JSON from db: \n", databaseItemsString);
+      const newLocal = JSON.parse(databaseItemsString);
+      return databaseItemsString
     }
   });
 };
